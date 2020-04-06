@@ -1,0 +1,45 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - edi
+scope: source.edi
+
+contexts:
+  main:
+    - include: separators
+    - include: segments
+    - include: number_literals
+    - include: strings
+
+  separators:
+    - match: \*
+      scope: punctuation.separator.sequence.edi
+    - match: ~
+      scope: punctuation.separator.sequence.edi
+
+  # TODO: add the rest of the segement names.
+  segments:
+    - match: '\b(ISA|GS|ST|B2|B2A|L11|G62|MS3|NTE|N1|N3|N4|G61|N7|M7|S5|OID|LAD|L5|LH1|L3|SE|AT5|AT8|GE|IEA)\b'
+      scope: variable.function.edi
+
+  number_literals:
+    - include: float_literals
+    - include: integer_literals
+
+  float_literals:
+    - match: \b\d+([.])(\d+)\b
+      scope: constant.numeric.float.edi
+      captures:
+        1: punctuation.separator.decimal.edi
+
+  integer_literals:
+    - match: \b\d+\b
+      scope: constant.numeric.integer.edi
+
+  strings:
+    - match: \S
+      push:
+        - meta_scope: string.unquoted.edi
+        - match: (?=\*|~)
+          pop: true
