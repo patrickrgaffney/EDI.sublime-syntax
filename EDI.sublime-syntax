@@ -15,7 +15,7 @@ contexts:
   separators:
     - match: \*
       scope: punctuation.separator.sequence.edi
-    - match: ~
+    - match: \~
       scope: punctuation.separator.sequence.edi
 
   # TODO: add the rest of the segement names.
